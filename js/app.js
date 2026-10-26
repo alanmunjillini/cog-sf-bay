@@ -466,4 +466,14 @@
   }
 
   renderAll();
+
+  // The browser jumps to #contact etc. before the JS-rendered sections above it
+  // exist, so it lands in the wrong place. Jump again once everything is drawn.
+  if (location.hash) {
+    var target = document.getElementById(location.hash.slice(1));
+    if (target) {
+      target.scrollIntoView();
+      window.addEventListener("load", function () { target.scrollIntoView(); });
+    }
+  }
 })();

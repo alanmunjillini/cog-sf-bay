@@ -23,24 +23,14 @@ window.SCHEDULE = {
    */
   weekly: [
     {
-      region: "south-bay",
-      day: "Sun",
-      start: "14:00",
-      end: "16:00",
-      title_zh: "主日聚会",
-      title_en: "Lord's Day Meeting",
-      place: "Palo Alto",
-      map: "https://maps.app.goo.gl/NioNL8m5Qpfcftxq5",
-    },
-    {
       region: "berkeley",
-      day: "Sat",
-      start: "18:30",
-      end: "20:30",
-      title_zh: "福音聚会",
-      title_en: "Gospel Meeting",
+      day: "Sun",
+      start: "11:00",
+      end: "14:00",
+      title_zh: "早午餐和聚会",
+      title_en: "Brunch & Gathering",
       place: "Berkeley",
-      map: "https://maps.app.goo.gl/Q9pTkRj9XYjQzx4eA",
+      map: "",
     },
 
     // 例子 / Example — 复制、删掉 // 、改成真实信息：
