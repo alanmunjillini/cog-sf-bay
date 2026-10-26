@@ -7,7 +7,7 @@
 window.SITE = {
   name_zh: "旧金山湾区教会",
   name_en: "Church of God in SF Bay Area",
-  email: "cogisf@gmail.com",
+  email: "alanmunj@gmail.com",
   contactForm: "https://forms.gle/Bsvrer4Zd3NxHAwt9",
   taxId: "93-4301783",
   zelle: "cogisf@gmail.com",
