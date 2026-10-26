@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>旧金山湾区教会 · Church of God in SF Bay Area</title>
+  <meta name="description" content="旧金山湾区教会 Church of God in SF Bay Area — 每周聚会时间、地点，以及 Berkeley、SCU、De Anza、South Bay、Stanford 各区聚会。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+SC:wght@600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>旧金山湾区教会</h1>
+        <p class="en-name">Church of God in SF Bay Area</p>
+        <blockquote>
+          <span data-i18n="verse"></span>
+          <cite data-i18n="verseRef"></cite>
+        </blockquote>
+        <a class="btn btn-light" href="#calendar" data-i18n="seeCalendar"></a>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="container">
+        <h2 class="section-title" data-i18n="aboutTitle"></h2>
+        <p data-i18n="aboutBody"></p>
+      </div>
+    </section>
+
+    <section class="regions">
+      <div class="container">
+        <h2 class="section-title" data-i18n="regionsTitle"></h2>
+        <div class="region-grid" id="regions-root"></div>
+      </div>
+    </section>
+
+    <section id="calendar">
+      <div class="container">
+        <h2 class="section-title" data-i18n="calendarTitle"></h2>
+        <div id="calendar-root"></div>
+      </div>
+    </section>
+
+    <section class="events-section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="eventsTitle"></h2>
+        <div id="events-root"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title" data-i18n="contactTitle"></h2>
+        <div id="contact-root"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="data/site.js"></script>
+  <script src="data/schedule.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
