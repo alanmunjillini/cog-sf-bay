@@ -221,7 +221,9 @@
       '<div class="header-inner">' +
       '<a class="brand" href="index.html">' +
       '<span class="brand-logo" aria-hidden="true">✦</span>' +
-      '<span class="brand-text"><b>Church of God</b><small>in SF Bay Area · 旧金山湾区教会</small></span>' +
+      (lang === "zh"
+        ? '<span class="brand-text"><b>' + esc(SITE.name_zh) + "</b><small>" + esc(SITE.name_en) + "</small></span>"
+        : '<span class="brand-text"><b>Church of God</b><small>in SF Bay Area</small></span>') +
       "</a>" +
       '<button class="menu-btn" aria-label="Menu" aria-expanded="false">☰</button>' +
       '<nav class="nav">' +
@@ -273,7 +275,7 @@
       "<div><h4>" + tr("footerRegions") + "</h4>" + regionLinks + "</div>" +
       "</div>" +
       '<div class="footer-bottom">' +
-      "<p><b>© " + new Date().getFullYear() + " " + esc(SITE.name_en) + "</b> · " + esc(SITE.name_zh) + "</p>" +
+      "<p><b>© " + new Date().getFullYear() + " " + esc(lang === "zh" ? SITE.name_zh : SITE.name_en) + "</b></p>" +
       "<p>" + tr("footerTax") + " " + esc(SITE.taxId) + " · " +
       tr("footerDonate") + ' <a href="mailto:' + esc(SITE.zelle) + '">' + esc(SITE.zelle) + "</a></p>" +
       "</div></div>";
