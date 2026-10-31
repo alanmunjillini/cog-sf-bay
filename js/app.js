@@ -39,6 +39,7 @@
       contactBtn: "Contact form",
       backHome: "‹ Back to home",
       photoSoon: "Photo coming soon",
+      special: "Special",
       footerAbout: "A young, joyful family of Christians across the San Francisco Bay Area.",
       footerExplore: "Explore",
       footerRegions: "Regions",
@@ -67,6 +68,7 @@
       contactBtn: "填写联系表格",
       backHome: "‹ 返回主页",
       photoSoon: "照片即将上传",
+      special: "特别",
       footerAbout: "旧金山湾区一群年轻、喜乐的基督徒，像一个大家庭。",
       footerExplore: "浏览",
       footerRegions: "各区",
@@ -220,7 +222,7 @@
     el.innerHTML =
       '<div class="header-inner">' +
       '<a class="brand" href="index.html">' +
-      '<span class="brand-logo" aria-hidden="true">✦</span>' +
+      '<span class="brand-logo" aria-hidden="true">CG</span>' +
       (lang === "zh"
         ? '<span class="brand-text"><b>' + esc(SITE.name_zh) + "</b><small>" + esc(SITE.name_en) + "</small></span>"
         : '<span class="brand-text"><b>Church of God</b><small>in SF Bay Area</small></span>') +
@@ -287,7 +289,7 @@
     el.innerHTML =
       '<div class="contact-actions">' +
       '<a class="btn" href="' + esc(SITE.contactForm) + '" target="_blank" rel="noopener">' + tr("contactBtn") + "</a>" +
-      '<a class="btn btn-outline-white" href="mailto:' + esc(SITE.email) + '">✉ ' + esc(SITE.email) + "</a>" +
+      '<a class="btn btn-outline-white" href="mailto:' + esc(SITE.email) + '">' + esc(SITE.email) + "</a>" +
       "</div>";
   }
 
@@ -428,7 +430,7 @@
               return (
                 '<div class="cal-item' + (x.special ? " special" : "") + '" style="--rc:' + regionColor(it.region) + '">' +
                 '<div class="ci-time">' + timeRange(it) + "</div>" +
-                '<div class="ci-title">' + (x.special ? "★ " : "") + esc(pick(it, "title")) + "</div>" +
+                '<div class="ci-title">' + (x.special ? '<span class="ci-tag">' + tr("special") + "</span> " : "") + esc(pick(it, "title")) + "</div>" +
                 '<div class="ci-meta">' + esc(regionName(it.region)) +
                 (it.place && it.place !== pick(regionById(it.region) || {}, "name") ? " · " + placeHtml(it) : "") + "</div>" +
                 (gcal ? '<a class="ci-add" href="' + esc(gcal) + '" target="_blank" rel="noopener">' + tr("addCal") + "</a>" : "") +
@@ -560,7 +562,7 @@
       for (var i = 0; i < slots; i++) {
         html +=
           '<div class="photo placeholder reveal">' +
-          '<div><span class="ph-icon">📷</span><small>' + tr("photoSoon") + "</small></div></div>";
+          '<small>' + tr("photoSoon") + "</small></div>";
       }
       html += "</div>";
       root.innerHTML = html;
