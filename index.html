@@ -1,63 +1,130 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>旧金山湾区教会 · Church of God in SF Bay Area</title>
-  <meta name="description" content="旧金山湾区教会 Church of God in SF Bay Area — 每周聚会时间、地点，以及 Berkeley、SCU、De Anza、South Bay、Stanford 各区聚会。">
+  <title>Church of God in SF Bay Area · 旧金山湾区教会</title>
+  <meta name="description" content="Church of God in SF Bay Area (旧金山湾区教会) — a young, bilingual (English & 中文) Christian church meeting in Berkeley, Stanford, Santa Clara (SCU), De Anza and the South Bay. See weekly meetings, Bible studies and events.">
+  <link rel="canonical" href="https://cog-sf-bay.pages.dev/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Church of God in SF Bay Area">
+  <meta property="og:title" content="Church of God in SF Bay Area · 旧金山湾区教会">
+  <meta property="og:description" content="A young, joyful family of Christians across the SF Bay Area. Weekly meetings in Berkeley, Stanford, SCU, De Anza and the South Bay.">
+  <meta property="og:url" content="https://cog-sf-bay.pages.dev/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>try{if(localStorage.getItem("lang")==="zh")document.documentElement.lang="zh-CN"}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+SC:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;700;800&display=swap">
   <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Church",
+    "name": "Church of God in SF Bay Area",
+    "alternateName": "旧金山湾区教会",
+    "url": "https://cog-sf-bay.pages.dev/",
+    "email": "alanmunj@gmail.com",
+    "areaServed": ["Berkeley", "Stanford", "Santa Clara", "Cupertino", "San Francisco Bay Area"],
+    "knowsLanguage": ["en", "zh"]
+  }
+  </script>
 </head>
-<body>
+<body data-title-en="Church of God in SF Bay Area · 旧金山湾区教会" data-title-zh="旧金山湾区教会 · Church of God in SF Bay Area">
   <header id="site-header"></header>
 
   <main>
     <section class="hero">
+      <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
       <div class="container">
-        <h1>旧金山湾区教会</h1>
-        <p class="en-name">Church of God in SF Bay Area</p>
-        <blockquote>
-          <span data-i18n="verse"></span>
-          <cite data-i18n="verseRef"></cite>
-        </blockquote>
-        <a class="btn btn-light" href="#calendar" data-i18n="seeCalendar"></a>
+        <div class="hero-badge"><span class="pulse"></span>
+          <span class="en">Bilingual church · English &amp; 中文</span><span class="zh">双语教会 · English &amp; 中文</span>
+        </div>
+        <h1>
+          <span class="en">Church of God in <span class="hl">SF Bay Area</span></span>
+          <span class="zh">旧金山<span class="hl">湾区</span>教会</span>
+        </h1>
+        <p class="lead">
+          <span class="en">A young, joyful family of Christians across the Bay — students, young professionals, and families. Come as you are, bring a friend, and enjoy Christ with us.</span>
+          <span class="zh">湾区一群年轻、喜乐的基督徒，像一个大家庭——有学生、年轻上班族，也有家庭。欢迎你就这样来，带上朋友，与我们一同享受基督！</span>
+        </p>
+        <div class="hero-ctas">
+          <a class="btn" href="#calendar"><span class="en">This week's meetings</span><span class="zh">查看本周聚会</span> →</a>
+          <a class="btn btn-outline-white" href="about.html"><span class="en">About us</span><span class="zh">关于我们</span></a>
+        </div>
+        <div class="hero-chips" id="hero-chips"></div>
       </div>
     </section>
 
-    <section class="about">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="en">Worship</span><span class="zh">敬拜</span><span class="star">✦</span>
+        <span class="en">Bible Reading</span><span class="zh">读经</span><span class="star">✦</span>
+        <span class="en">Brunch</span><span class="zh">爱筵</span><span class="star">✦</span>
+        <span class="en">Prayer</span><span class="zh">祷告</span><span class="star">✦</span>
+        <span class="en">Friendship</span><span class="zh">交通</span><span class="star">✦</span>
+        <span class="en">Gospel</span><span class="zh">福音</span><span class="star">✦</span>
+        <span class="en">Worship</span><span class="zh">敬拜</span><span class="star">✦</span>
+        <span class="en">Bible Reading</span><span class="zh">读经</span><span class="star">✦</span>
+        <span class="en">Brunch</span><span class="zh">爱筵</span><span class="star">✦</span>
+        <span class="en">Prayer</span><span class="zh">祷告</span><span class="star">✦</span>
+        <span class="en">Friendship</span><span class="zh">交通</span><span class="star">✦</span>
+        <span class="en">Gospel</span><span class="zh">福音</span><span class="star">✦</span>
+      </div>
+    </div>
+
+    <section id="regions">
       <div class="container">
-        <h2 class="section-title" data-i18n="aboutTitle"></h2>
-        <p data-i18n="aboutBody"></p>
+        <div class="section-head reveal">
+          <span class="eyebrow"><span class="en">Five regions · one family</span><span class="zh">五个区 · 一个家</span></span>
+          <h2 class="section-title"><span class="en">Find your people</span><span class="zh">找到你的小组</span></h2>
+          <p><span class="en">We meet all around the Bay. Pick the one closest to you.</span><span class="zh">我们在湾区各地聚会，选一个离你最近的吧。</span></p>
+        </div>
+        <div class="region-grid reveal" id="regions-root"></div>
       </div>
     </section>
 
-    <section class="regions">
+    <section id="calendar" class="calendar-section">
       <div class="container">
-        <h2 class="section-title" data-i18n="regionsTitle"></h2>
-        <div class="region-grid" id="regions-root"></div>
+        <div class="section-head reveal">
+          <span class="eyebrow"><span class="en">Updated every week</span><span class="zh">每周更新</span></span>
+          <h2 class="section-title"><span class="en">Weekly Calendar</span><span class="zh">每周日历</span></h2>
+          <p><span class="en">Tap a meeting to add it to your Google Calendar.</span><span class="zh">点一下就能把聚会加入你的 Google 日历。</span></p>
+        </div>
+        <div id="calendar-root" class="reveal"></div>
       </div>
     </section>
 
-    <section id="calendar">
+    <section id="photos">
       <div class="container">
-        <h2 class="section-title" data-i18n="calendarTitle"></h2>
-        <div id="calendar-root"></div>
+        <div class="section-head reveal">
+          <span class="eyebrow"><span class="en">Life together</span><span class="zh">一同生活</span></span>
+          <h2 class="section-title"><span class="en">Moments</span><span class="zh">精彩瞬间</span></h2>
+          <p><span class="en">Brothers and sisters around the Bay.</span><span class="zh">湾区的弟兄姊妹们。</span></p>
+        </div>
+        <div id="gallery-root" data-limit="7"></div>
+        <div class="photos-cta"><a class="btn btn-ghost" href="photos.html"><span class="en">See all photos</span><span class="zh">查看全部照片</span> →</a></div>
       </div>
     </section>
 
-    <section class="events-section">
+    <section class="calendar-section">
       <div class="container">
-        <h2 class="section-title" data-i18n="eventsTitle"></h2>
+        <div class="section-head reveal">
+          <span class="eyebrow"><span class="en">Don't miss out</span><span class="zh">别错过</span></span>
+          <h2 class="section-title"><span class="en">Special Events</span><span class="zh">特别聚会</span></h2>
+        </div>
         <div id="events-root"></div>
       </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="contact">
       <div class="container">
-        <h2 class="section-title" data-i18n="contactTitle"></h2>
-        <div id="contact-root"></div>
+        <div class="cta-band reveal">
+          <span class="blob b1"></span><span class="blob b2"></span>
+          <h2><span class="en">Come hang out with us!</span><span class="zh">欢迎来和我们一起！</span></h2>
+          <p><span class="en">Want to join a meeting or a Bible study group, or just have a question? Reach out — we'd love to meet you.</span><span class="zh">想参加聚会、读经小组，或者有任何问题？欢迎联系我们，很期待认识你！</span></p>
+          <div id="contact-root"></div>
+        </div>
       </div>
     </section>
   </main>
@@ -66,6 +133,7 @@
 
   <script src="data/site.js"></script>
   <script src="data/schedule.js"></script>
+  <script src="data/photos.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

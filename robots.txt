@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cog-sf-bay.pages.dev/sitemap.xml

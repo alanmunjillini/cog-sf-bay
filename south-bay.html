@@ -1,48 +1,74 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>South Bay 南湾 · 旧金山湾区教会</title>
-  <meta name="description" content="旧金山湾区教会 South Bay 南湾 聚会时间和地点 · Church of God in SF Bay Area — South Bay 南湾 meetings.">
+  <title>South Bay · Church of God in SF Bay Area</title>
+  <meta name="description" content="South Bay meetings of the Church of God in SF Bay Area (旧金山湾区教会 · 南湾) — weekly meeting times, places, and events.">
+  <link rel="canonical" href="https://cog-sf-bay.pages.dev/south-bay">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Church of God in SF Bay Area">
+  <meta property="og:title" content="South Bay · Church of God in SF Bay Area">
+  <meta property="og:url" content="https://cog-sf-bay.pages.dev/south-bay">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>try{if(localStorage.getItem("lang")==="zh")document.documentElement.lang="zh-CN"}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+SC:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;700;800&display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-region="south-bay">
   <header id="site-header"></header>
 
   <main>
-    <section class="region-hero" id="region-hero-wrap">
+    <section class="region-hero">
       <div class="container" id="region-hero"></div>
     </section>
 
     <section>
       <div class="container">
-        <h2 class="section-title" data-i18n="weeklyTitle"></h2>
-        <div id="weekly-root"></div>
+        <div class="section-head reveal">
+          <h2 class="section-title"><span class="en">Weekly Meetings</span><span class="zh">固定聚会</span></h2>
+        </div>
+        <div id="weekly-root" class="reveal"></div>
       </div>
     </section>
 
-    <section id="calendar" class="events-section">
+    <section id="calendar" class="calendar-section">
       <div class="container">
-        <h2 class="section-title" data-i18n="calendarTitle"></h2>
-        <div id="calendar-root"></div>
+        <div class="section-head reveal">
+          <h2 class="section-title"><span class="en">Weekly Calendar</span><span class="zh">每周日历</span></h2>
+        </div>
+        <div id="calendar-root" class="reveal"></div>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <h2 class="section-title" data-i18n="eventsTitle"></h2>
+        <div class="section-head reveal">
+          <h2 class="section-title"><span class="en">Photos</span><span class="zh">照片</span></h2>
+        </div>
+        <div id="gallery-root" data-region="south-bay" data-limit="7"></div>
+      </div>
+    </section>
+
+    <section class="calendar-section">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title"><span class="en">Special Events</span><span class="zh">特别聚会</span></h2>
+        </div>
         <div id="events-root"></div>
       </div>
     </section>
 
-    <section id="contact" class="contact events-section">
+    <section id="contact">
       <div class="container">
-        <h2 class="section-title" data-i18n="contactTitle"></h2>
-        <div id="contact-root"></div>
+        <div class="cta-band reveal">
+          <span class="blob b1"></span><span class="blob b2"></span>
+          <h2><span class="en">Come hang out with us!</span><span class="zh">欢迎来和我们一起！</span></h2>
+          <p><span class="en">Want to join a meeting or have a question? Reach out — we'd love to meet you.</span><span class="zh">想参加聚会或者有任何问题？欢迎联系我们，很期待认识你！</span></p>
+          <div id="contact-root"></div>
+        </div>
       </div>
     </section>
   </main>
@@ -51,6 +77,7 @@
 
   <script src="data/site.js"></script>
   <script src="data/schedule.js"></script>
+  <script src="data/photos.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

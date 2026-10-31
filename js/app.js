@@ -1,12 +1,16 @@
 /*
- * Shared page logic: header, footer, language toggle, calendar.
- * Content lives in data/site.js and data/schedule.js — edit those instead.
+ * Shared page logic: header, footer, language toggle, calendar, photos, animations.
+ * Content lives in data/site.js, data/schedule.js and data/photos.js — edit those instead.
+ *
+ * Language: English is the default. Static page text is written twice in the HTML
+ * (<span class="en"> / <span class="zh">) and CSS shows one; dynamic text uses I18N below.
  */
 (function () {
   "use strict";
 
   var SITE = window.SITE;
   var SCHEDULE = window.SCHEDULE || { weekly: [], events: [] };
+  var PHOTOS = window.PHOTOS || [];
   var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   var DAY_NAMES = {
     zh: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
@@ -14,85 +18,76 @@
   };
 
   var I18N = {
-    zh: {
-      navHome: "主页",
-      navCalendar: "日历",
-      navRegions: "各区",
-      navContact: "联系我们",
-      langBtn: "EN",
-      verse: "因为无论在哪里，有两三个人奉我的名聚会，那里就有我在他们中间。",
-      verseRef: "马太福音 18:20",
-      seeCalendar: "查看本周聚会",
-      aboutTitle: "欢迎来到湾区教会",
-      aboutBody:
-        "我们是在旧金山湾区的一班基督徒，照着圣经聚会，追求认识基督，过彼此相爱的教会生活。湾区各地都有聚会，不论你是学生、上班族还是家庭，都欢迎你来。",
-      regionsTitle: "五个区",
-      viewRegion: "查看聚会",
-      calendarTitle: "每周日历",
-      prevWeek: "‹ 上一周",
-      thisWeek: "本周",
-      nextWeek: "下一周 ›",
-      all: "全部",
-      allRegions: "全湾区",
-      eventsTitle: "特别聚会",
-      noEvents: "目前没有特别聚会，请留意日历更新。",
-      weeklyTitle: "固定聚会",
-      weeklyEmpty: "聚会时间待更新。想参加的话，请通过下面的“联系我们”告诉我们，我们会尽快回复你！",
-      contactTitle: "联系我们",
-      contactBody: "想参加聚会、读经小组，或者有任何问题，欢迎填写表格或发邮件给我们，我们会尽快回复你！",
-      contactBtn: "填写联系表格",
-      backHome: "‹ 返回主页",
-      map: "地图",
-      footerTax: "我们是注册的 501(c)(3) 非营利组织，税号",
-      footerDonate: "奉献请用 Zelle 转至",
-    },
     en: {
       navHome: "Home",
+      navAbout: "About",
       navCalendar: "Calendar",
+      navPhotos: "Photos",
       navRegions: "Regions",
       navContact: "Contact",
       langBtn: "中文",
-      verse: "For where two or three are gathered together in my name, there am I in the midst of them.",
-      verseRef: "Matthew 18:20",
-      seeCalendar: "This week's meetings",
-      aboutTitle: "Welcome",
-      aboutBody:
-        "We are Christians in the San Francisco Bay Area who meet according to the Bible, pursue knowing Christ, and live a church life of mutual love. We meet across the Bay — students, working people, and families are all welcome.",
-      regionsTitle: "Our Regions",
-      viewRegion: "See meetings",
-      calendarTitle: "Weekly Calendar",
+      viewRegion: "See meetings →",
+      timesSoon: "Times coming soon",
       prevWeek: "‹ Prev",
       thisWeek: "This week",
       nextWeek: "Next ›",
       all: "All",
       allRegions: "All Bay Area",
-      eventsTitle: "Special Events",
-      noEvents: "No special events right now — check back soon.",
-      weeklyTitle: "Weekly Meetings",
+      addCal: "+ Google Calendar",
+      noEvents: "No special events right now — check back soon!",
       weeklyEmpty: "Meeting times coming soon. Want to join? Contact us below and we'll get back to you!",
-      contactTitle: "Contact Us",
-      contactBody: "Want to join a meeting or a Bible study group, or have a question? Fill out the form or email us — we'll reply soon!",
-      contactBtn: "Open contact form",
+      contactBtn: "Contact form",
       backHome: "‹ Back to home",
-      map: "Map",
+      photoSoon: "Photo coming soon",
+      events: "Events",
+      footerAbout: "A young, joyful family of Christians across the San Francisco Bay Area.",
+      footerExplore: "Explore",
+      footerRegions: "Regions",
       footerTax: "We are a registered 501(c)(3) non-profit, tax ID",
       footerDonate: "To donate, Zelle to",
+      verse: "“For where two or three are gathered together in my name, there am I in the midst of them.” — Matthew 18:20",
+    },
+    zh: {
+      navHome: "主页",
+      navAbout: "关于我们",
+      navCalendar: "日历",
+      navPhotos: "照片",
+      navRegions: "各区",
+      navContact: "联系我们",
+      langBtn: "EN",
+      viewRegion: "查看聚会 →",
+      timesSoon: "时间待更新",
+      prevWeek: "‹ 上一周",
+      thisWeek: "本周",
+      nextWeek: "下一周 ›",
+      all: "全部",
+      allRegions: "全湾区",
+      addCal: "+ 加入 Google 日历",
+      noEvents: "目前没有特别聚会，请留意更新！",
+      weeklyEmpty: "聚会时间待更新。想参加的话，请通过下面的“联系我们”告诉我们，我们会尽快回复你！",
+      contactBtn: "填写联系表格",
+      backHome: "‹ 返回主页",
+      photoSoon: "照片即将上传",
+      events: "活动",
+      footerAbout: "旧金山湾区一群年轻、喜乐的基督徒，像一个大家庭。",
+      footerExplore: "浏览",
+      footerRegions: "各区",
+      footerTax: "我们是注册的 501(c)(3) 非营利组织，税号",
+      footerDonate: "奉献请用 Zelle 转至",
+      verse: "“因为无论在哪里，有两三个人奉我的名聚会，那里就有我在他们中间。” —— 马太福音 18:20",
     },
   };
 
-  var lang = "zh";
-  try {
-    if (localStorage.getItem("lang") === "en") lang = "en";
-  } catch (e) {}
+  var lang = document.documentElement.lang === "zh-CN" ? "zh" : "en";
 
   // ---------- helpers ----------
 
   function tr(key) {
-    return I18N[lang][key] || I18N.zh[key] || key;
+    return I18N[lang][key] || I18N.en[key] || key;
   }
 
   function pick(obj, field) {
-    return obj[field + "_" + lang] || obj[field + "_zh"] || obj[field + "_en"] || obj[field] || "";
+    return obj[field + "_" + lang] || obj[field + "_en"] || obj[field + "_zh"] || obj[field] || "";
   }
 
   function esc(s) {
@@ -123,8 +118,7 @@
   function fmtTime(hhmm) {
     var p = hhmm.split(":");
     var h = +p[0];
-    var ap = h >= 12 ? "PM" : "AM";
-    return (h % 12 || 12) + ":" + p[1] + " " + ap;
+    return (h % 12 || 12) + ":" + p[1] + " " + (h >= 12 ? "PM" : "AM");
   }
 
   function timeRange(item) {
@@ -152,7 +146,7 @@
 
   function regionColor(id) {
     var r = regionById(id);
-    return r ? r.color : "var(--accent)";
+    return r ? r.color : "var(--coral)";
   }
 
   // "all" items show on every region's page.
@@ -189,29 +183,57 @@
       : place;
   }
 
+  // Link that opens Google Calendar with the meeting pre-filled (weekly ones repeat).
+  function gcalUrl(item, date, weekly) {
+    if (!item.start) return "";
+    var d = ymd(date).replace(/-/g, "");
+    var s = item.start.replace(":", "") + "00";
+    var e = (item.end || item.start).replace(":", "") + "00";
+    var params = [
+      "action=TEMPLATE",
+      "text=" + encodeURIComponent(pick(item, "title") + " · " + SITE.name_en),
+      "dates=" + d + "T" + s + "/" + d + "T" + e,
+      "ctz=America/Los_Angeles",
+    ];
+    if (item.place) params.push("location=" + encodeURIComponent(item.place));
+    if (weekly) params.push("recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY"));
+    return "https://calendar.google.com/calendar/render?" + params.join("&");
+  }
+
   // ---------- header / footer ----------
+
+  function currentPage() {
+    var p = location.pathname.split("/").pop().replace(/\.html$/, "");
+    return p || "index";
+  }
 
   function renderHeader() {
     var el = document.getElementById("site-header");
     if (!el) return;
+    var page = currentPage();
     var regionLinks = SITE.regions
       .map(function (r) {
         return '<a href="' + r.id + '.html"><span class="dot" style="--rc:' + r.color + '"></span>' + esc(pick(r, "name")) + "</a>";
       })
       .join("");
+    function link(href, key, id) {
+      return '<a href="' + href + '"' + (page === id ? ' class="active"' : "") + ">" + tr(key) + "</a>";
+    }
     el.innerHTML =
       '<div class="header-inner">' +
       '<a class="brand" href="index.html">' +
-      '<span class="brand-mark" aria-hidden="true">✦</span>' +
-      '<span class="brand-text"><b>' + esc(SITE.name_zh) + "</b><small>" + esc(SITE.name_en) + "</small></span>" +
+      '<span class="brand-logo" aria-hidden="true">✦</span>' +
+      '<span class="brand-text"><b>Church of God</b><small>in SF Bay Area · 旧金山湾区教会</small></span>' +
       "</a>" +
       '<button class="menu-btn" aria-label="Menu" aria-expanded="false">☰</button>' +
       '<nav class="nav">' +
-      '<a href="index.html">' + tr("navHome") + "</a>" +
-      '<a href="index.html#calendar">' + tr("navCalendar") + "</a>" +
-      '<details class="nav-regions"><summary>' + tr("navRegions") + "</summary><div class=\"menu\">" + regionLinks + "</div></details>" +
+      link("index.html", "navHome", "index") +
+      link("about.html", "navAbout", "about") +
+      link("index.html#calendar", "navCalendar", "") +
+      link("photos.html", "navPhotos", "photos") +
+      '<details class="nav-regions"><summary>' + tr("navRegions") + '</summary><div class="menu">' + regionLinks + "</div></details>" +
       '<a href="#contact">' + tr("navContact") + "</a>" +
-      '<button class="lang-btn" type="button">' + tr("langBtn") + "</button>" +
+      '<button class="lang-btn" type="button" aria-label="Switch language">' + tr("langBtn") + "</button>" +
       "</nav></div>";
 
     var menuBtn = el.querySelector(".menu-btn");
@@ -219,8 +241,12 @@
       var open = el.classList.toggle("open");
       menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
     });
+    el.querySelector(".nav").addEventListener("click", function (e) {
+      if (e.target.closest("a")) el.classList.remove("open");
+    });
     el.querySelector(".lang-btn").addEventListener("click", function () {
-      lang = lang === "zh" ? "en" : "zh";
+      lang = lang === "en" ? "zh" : "en";
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       try {
         localStorage.setItem("lang", lang);
       } catch (e) {}
@@ -231,32 +257,51 @@
   function renderFooter() {
     var el = document.getElementById("site-footer");
     if (!el) return;
+    var regionLinks = SITE.regions
+      .map(function (r) { return '<a href="' + r.id + '.html">' + esc(pick(r, "name")) + "</a>"; })
+      .join("");
     el.innerHTML =
+      '<div class="container">' +
+      '<div class="footer-grid">' +
+      "<div><h4>" + esc(lang === "zh" ? SITE.name_zh : SITE.name_en) + "</h4>" +
+      "<p>" + tr("footerAbout") + "</p>" +
+      '<p class="footer-verse">' + tr("verse") + "</p></div>" +
+      "<div><h4>" + tr("footerExplore") + "</h4>" +
+      '<a href="index.html">' + tr("navHome") + "</a>" +
+      '<a href="about.html">' + tr("navAbout") + "</a>" +
+      '<a href="index.html#calendar">' + tr("navCalendar") + "</a>" +
+      '<a href="photos.html">' + tr("navPhotos") + "</a>" +
+      '<a href="#contact">' + tr("navContact") + "</a></div>" +
+      "<div><h4>" + tr("footerRegions") + "</h4>" + regionLinks + "</div>" +
+      "</div>" +
+      '<div class="footer-bottom">' +
       "<p><b>© " + new Date().getFullYear() + " " + esc(SITE.name_en) + "</b> · " + esc(SITE.name_zh) + "</p>" +
-      "<p>" + tr("footerTax") + " " + esc(SITE.taxId) + "<br>" +
-      tr("footerDonate") + ' <a href="mailto:' + esc(SITE.zelle) + '">' + esc(SITE.zelle) + "</a></p>";
-  }
-
-  function renderStaticText() {
-    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-    var nodes = document.querySelectorAll("[data-i18n]");
-    for (var i = 0; i < nodes.length; i++) {
-      nodes[i].textContent = tr(nodes[i].getAttribute("data-i18n"));
-    }
+      "<p>" + tr("footerTax") + " " + esc(SITE.taxId) + " · " +
+      tr("footerDonate") + ' <a href="mailto:' + esc(SITE.zelle) + '">' + esc(SITE.zelle) + "</a></p>" +
+      "</div></div>";
   }
 
   function renderContact() {
     var el = document.getElementById("contact-root");
     if (!el) return;
     el.innerHTML =
-      "<p>" + tr("contactBody") + "</p>" +
-      '<p class="contact-actions">' +
+      '<div class="contact-actions">' +
       '<a class="btn" href="' + esc(SITE.contactForm) + '" target="_blank" rel="noopener">' + tr("contactBtn") + "</a>" +
-      '<a class="btn btn-ghost" href="mailto:' + esc(SITE.email) + '">' + esc(SITE.email) + "</a>" +
-      "</p>";
+      '<a class="btn btn-outline-white" href="mailto:' + esc(SITE.email) + '">✉ ' + esc(SITE.email) + "</a>" +
+      "</div>";
   }
 
-  // ---------- home page: region cards ----------
+  function renderHeroChips() {
+    var el = document.getElementById("hero-chips");
+    if (!el) return;
+    el.innerHTML = SITE.regions
+      .map(function (r) {
+        return '<a href="' + r.id + '.html" style="--rc:' + r.color + '"><span class="dot" style="background:' + r.color + '"></span>' + esc(pick(r, "name")) + "</a>";
+      })
+      .join("");
+  }
+
+  // ---------- region cards ----------
 
   function renderRegionCards() {
     var el = document.getElementById("regions-root");
@@ -270,20 +315,20 @@
                 return DAY_NAMES[lang][DAYS.indexOf(w.day)] + " " + fmtTime(w.start) + " · " + esc(pick(w, "title"));
               })
               .join("<br>")
-          : '<span class="muted">' + (lang === "zh" ? "时间待更新" : "Times coming soon") + "</span>";
+          : '<span class="muted">' + tr("timesSoon") + "</span>";
         return (
           '<a class="region-card" href="' + r.id + '.html" style="--rc:' + r.color + '">' +
           "<h3>" + esc(pick(r, "name")) + "</h3>" +
           '<p class="area">' + esc(pick(r, "area")) + "</p>" +
           '<p class="summary">' + summary + "</p>" +
-          '<span class="more">' + tr("viewRegion") + " →</span>" +
+          '<span class="more">' + tr("viewRegion") + "</span>" +
           "</a>"
         );
       })
       .join("");
   }
 
-  // ---------- region page: hero + weekly cards ----------
+  // ---------- region page ----------
 
   function renderRegionHero(regionId) {
     var el = document.getElementById("region-hero");
@@ -298,6 +343,7 @@
       '<p class="intro">' + esc(pick(r, "intro")) + "</p>";
   }
 
+  // Used on region pages (one region) and the About page (data-region="all").
   function renderWeeklyCards(regionId) {
     var el = document.getElementById("weekly-root");
     if (!el) return;
@@ -320,6 +366,7 @@
             '<div class="wc-title">' + esc(pick(w, "title")) + "</div>" +
             '<div class="wc-time">' + timeRange(w) + "</div>" +
             '<div class="wc-place">' + placeHtml(w) + "</div>" +
+            (regionId === "all" ? '<div class="wc-region">● ' + esc(regionName(w.region)) + "</div>" : "") +
             "</div>"
           );
         })
@@ -377,17 +424,20 @@
           html += items
             .map(function (x) {
               var it = x.item;
+              var gcal = gcalUrl(it, d, !x.special);
               return (
                 '<div class="cal-item' + (x.special ? " special" : "") + '" style="--rc:' + regionColor(it.region) + '">' +
                 '<div class="ci-time">' + timeRange(it) + "</div>" +
                 '<div class="ci-title">' + (x.special ? "★ " : "") + esc(pick(it, "title")) + "</div>" +
-                '<div class="ci-meta">' + esc(regionName(it.region)) + (it.place ? " · " + placeHtml(it) : "") + "</div>" +
+                '<div class="ci-meta">' + esc(regionName(it.region)) +
+                (it.place && it.place !== pick(regionById(it.region) || {}, "name") ? " · " + placeHtml(it) : "") + "</div>" +
+                (gcal ? '<a class="ci-add" href="' + esc(gcal) + '" target="_blank" rel="noopener">' + tr("addCal") + "</a>" : "") +
                 "</div>"
               );
             })
             .join("");
         } else {
-          html += '<div class="cal-none">—</div>';
+          html += '<div class="cal-none">·</div>';
         }
         html += "</div>";
       }
@@ -432,7 +482,7 @@
           var note = pick(e, "note");
           return (
             '<article class="event" style="--rc:' + regionColor(e.region) + '">' +
-            '<div class="event-date"><span class="m">' + (d.getMonth() + 1) + (lang === "zh" ? "月" : "/") + "</span>" +
+            '<div class="event-date"><span class="m">' + (lang === "zh" ? d.getMonth() + 1 + "月" : d.toLocaleDateString("en-US", { month: "short" })) + "</span>" +
             '<span class="d">' + d.getDate() + "</span>" +
             '<span class="w">' + DAY_NAMES[lang][d.getDay()] + "</span></div>" +
             '<div class="event-body"><h3>' + esc(pick(e, "title")) + "</h3>" +
@@ -445,27 +495,192 @@
       "</div>";
   }
 
+  // ---------- photos + lightbox ----------
+
+  var lightbox = null;
+  var lbList = [];
+  var lbIndex = 0;
+
+  function ensureLightbox() {
+    if (lightbox) return;
+    lightbox = document.createElement("div");
+    lightbox.className = "lightbox";
+    lightbox.setAttribute("role", "dialog");
+    lightbox.innerHTML =
+      '<button class="lb-btn lb-close" aria-label="Close">✕</button>' +
+      '<button class="lb-btn lb-prev" aria-label="Previous">‹</button>' +
+      "<figure><img alt=\"\"><figcaption></figcaption></figure>" +
+      '<button class="lb-btn lb-next" aria-label="Next">›</button>';
+    document.body.appendChild(lightbox);
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox || e.target.closest(".lb-close")) closeLightbox();
+      else if (e.target.closest(".lb-prev")) showPhoto(lbIndex - 1);
+      else if (e.target.closest(".lb-next")) showPhoto(lbIndex + 1);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showPhoto(lbIndex - 1);
+      if (e.key === "ArrowRight") showPhoto(lbIndex + 1);
+    });
+  }
+
+  function showPhoto(i) {
+    lbIndex = (i + lbList.length) % lbList.length;
+    var p = lbList[lbIndex];
+    lightbox.querySelector("img").src = p.src;
+    lightbox.querySelector("img").alt = pick(p, "caption");
+    lightbox.querySelector("figcaption").textContent = pick(p, "caption");
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  function makeGallery(root) {
+    var limit = +root.getAttribute("data-limit") || 0;
+    var regionLock = root.getAttribute("data-region");
+    var withFilters = root.hasAttribute("data-filters");
+    var filter = regionLock || "all";
+
+    function albums() {
+      return SITE.regions
+        .map(function (r) { return { id: r.id, name: pick(r, "name"), color: r.color }; })
+        .concat([{ id: "events", name: tr("events"), color: "var(--coral)" }]);
+    }
+
+    function draw() {
+      var list = PHOTOS.filter(function (p) { return p.src && (filter === "all" || p.album === filter); });
+      if (limit) list = list.slice(0, limit);
+      var html = "";
+      if (withFilters) {
+        html +=
+          '<div class="photo-filters">' +
+          '<button type="button" data-album="all" class="' + (filter === "all" ? "active" : "") + '">' + tr("all") + "</button>" +
+          albums()
+            .map(function (a) {
+              return '<button type="button" data-album="' + a.id + '" class="' + (filter === a.id ? "active" : "") + '">' + esc(a.name) + "</button>";
+            })
+            .join("") +
+          "</div>";
+      }
+      html += '<div class="photo-grid' + (limit ? " mosaic" : "") + '">';
+      if (list.length) {
+        html += list
+          .map(function (p, i) {
+            return (
+              '<button type="button" class="photo reveal" data-i="' + i + '">' +
+              '<img loading="lazy" src="' + esc(p.src) + '" alt="' + esc(pick(p, "caption")) + '">' +
+              (pick(p, "caption") ? '<span class="cap">' + esc(pick(p, "caption")) + "</span>" : "") +
+              "</button>"
+            );
+          })
+          .join("");
+      } else {
+        var n = limit || 9;
+        var colors = albums();
+        for (var i = 0; i < n; i++) {
+          html +=
+            '<div class="photo placeholder reveal" style="--rc:' + colors[i % colors.length].color + '">' +
+            '<div><span class="ph-icon">📷</span><small>' + tr("photoSoon") + "</small></div></div>";
+        }
+      }
+      html += "</div>";
+      root.innerHTML = html;
+      root._list = list;
+      observeReveals(root);
+    }
+
+    root.addEventListener("click", function (e) {
+      var f = e.target.closest("[data-album]");
+      if (f) {
+        filter = f.getAttribute("data-album");
+        draw();
+        return;
+      }
+      var ph = e.target.closest(".photo[data-i]");
+      if (ph) {
+        ensureLightbox();
+        lbList = root._list;
+        showPhoto(+ph.getAttribute("data-i"));
+        lightbox.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+    });
+
+    return draw;
+  }
+
+  // ---------- animations ----------
+
+  var revealObserver =
+    "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting) {
+                en.target.classList.add("in");
+                revealObserver.unobserve(en.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        )
+      : null;
+
+  function observeReveals(scope) {
+    var nodes = (scope || document).querySelectorAll(".reveal:not(.in)");
+    for (var i = 0; i < nodes.length; i++) {
+      if (revealObserver) revealObserver.observe(nodes[i]);
+      else nodes[i].classList.add("in");
+    }
+  }
+
+  function setupScrollUi() {
+    var header = document.getElementById("site-header");
+    var toTop = document.createElement("button");
+    toTop.className = "to-top";
+    toTop.setAttribute("aria-label", "Back to top");
+    toTop.textContent = "↑";
+    toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    document.body.appendChild(toTop);
+    function onScroll() {
+      var y = window.scrollY;
+      if (header) header.classList.toggle("scrolled", y > 10);
+      toTop.classList.toggle("show", y > 600);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
   // ---------- boot ----------
 
   var pageRegion = document.body.getAttribute("data-region") || "all";
+  var isRegionPage = !!regionById(pageRegion);
   var calRoot = document.getElementById("calendar-root");
-  var drawCalendar = calRoot ? makeCalendar(calRoot, pageRegion === "all" ? null : pageRegion) : null;
+  var drawCalendar = calRoot ? makeCalendar(calRoot, isRegionPage ? pageRegion : null) : null;
+  var galleryRoot = document.getElementById("gallery-root");
+  var drawGallery = galleryRoot ? makeGallery(galleryRoot) : null;
+  var titles = { en: document.body.getAttribute("data-title-en"), zh: document.body.getAttribute("data-title-zh") };
 
   function renderAll() {
-    renderStaticText();
+    if (titles[lang]) document.title = titles[lang];
     renderHeader();
     renderFooter();
     renderContact();
+    renderHeroChips();
     renderRegionCards();
-    if (pageRegion !== "all") {
-      renderRegionHero(pageRegion);
-      renderWeeklyCards(pageRegion);
-    }
+    if (isRegionPage) renderRegionHero(pageRegion);
+    renderWeeklyCards(pageRegion);
     if (drawCalendar) drawCalendar();
+    if (drawGallery) drawGallery();
     renderEvents(pageRegion);
   }
 
   renderAll();
+  setupScrollUi();
+  observeReveals();
 
   // The browser jumps to #contact etc. before the JS-rendered sections above it
   // exist, so it lands in the wrong place. Jump again once everything is drawn.

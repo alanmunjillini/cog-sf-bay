@@ -1,5 +1,7 @@
 # 旧金山湾区教会网站 · Church of God in SF Bay Area
 
+网站地址：https://cog-sf-bay.pages.dev （默认英文，右上角可切换中文）
+
 纯静态网站：没有服务器、没有数据库、不需要编译。改完文件推送到 GitHub，网站一两分钟内自动更新。
 
 A plain static site — no server, no database, no build step. Push a change to `main` and GitHub Pages updates the site in a minute or two.
@@ -24,25 +26,37 @@ A plain static site — no server, no database, no build step. Push a change to 
 - 时间用 24 小时制：`"14:00"` = 2:00 PM
 - 每一条最后的逗号 `,` 和引号 `"` 不要漏掉；改完如果日历变空白，多半是少了逗号或引号
 
+## 加照片 · Adding photos
+
+1. 在 GitHub 上打开 `images/photos` 文件夹 → **Add file** → **Upload files**，上传照片（最好小于 2MB）。
+2. 打开 **`data/photos.js`**，照着里面的例子加一行（`src` 填照片路径，`album` 填区名或 `"events"`）。
+3. Commit，一两分钟后网站上就会出现。没有照片时会显示“Photo coming soon”占位框。
+
 ## 其他内容 · Other content
 
 | 要改什么 | 文件 |
 |---|---|
 | 教会名称、邮箱、联系表格、税号、Zelle、五个区的介绍和颜色 | `data/site.js` |
-| 页面上的固定文字（欢迎词、按钮文字，中英文） | `js/app.js` 顶部的 `I18N` |
+| 页面上的文字（每段都有 `class="en"` 英文和 `class="zh"` 中文两份） | `index.html`、`about.html`、`photos.html` |
+| 自动生成的文字（导航、按钮、日历） | `js/app.js` 顶部的 `I18N` |
 | 颜色、字体、版面 | `css/style.css` |
 
 ## 文件结构 · Structure
 
 ```
-index.html            主页：欢迎、五个区、每周日历、特别聚会、联系我们
+index.html            主页：欢迎、五个区、每周日历、照片、特别聚会、联系我们
+about.html            关于我们
+photos.html           照片墙（可按区筛选，点击放大）
 berkeley.html         各区页面（内容都来自 data/ 里的文件）
 scu.html
 de-anza.html
 south-bay.html
 stanford.html
 data/schedule.js      ← 每周改这个
+data/photos.js        ← 照片
 data/site.js          ← 基本信息
+images/photos/        照片文件放这里
+sitemap.xml robots.txt  给 Google 搜索用
 js/app.js             页面逻辑（一般不用改）
 css/style.css         样式
 ```
