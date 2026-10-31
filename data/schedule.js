@@ -54,6 +54,19 @@ window.SCHEDULE = {
    *   note_zh / note_en: 简短说明（可选）/ short description (optional)
    */
   events: [
+    {
+      region: "south-bay",
+      date: "2026-11-07",
+      start: "14:00",
+      end: "15:30",
+      title_zh: "诗歌音乐会",
+      title_en: "Hymns Music Concert",
+      place: "",
+      map: "",
+      note_zh: "一同来享受诗歌音乐会！",
+      note_en: "Come enjoy an afternoon of hymns and music together!",
+    },
+
     // 例子 / Example:
     // {
     //   region: "all",
