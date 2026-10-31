@@ -4,7 +4,7 @@
 
 纯静态网站：没有服务器、没有数据库、不需要编译。改完文件推送到 GitHub，网站一两分钟内自动更新。
 
-A plain static site — no server, no database, no build step. Push a change to `main` and GitHub Pages updates the site in a minute or two.
+A plain static site — no server, no database, no build step. Push a change to `main` and Cloudflare Pages updates the site in a minute or two.
 
 ## 每周更新日历 · Updating the calendar each week
 
