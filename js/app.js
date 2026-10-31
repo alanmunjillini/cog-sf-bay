@@ -222,7 +222,7 @@
     el.innerHTML =
       '<div class="header-inner">' +
       '<a class="brand" href="index.html">' +
-      '<span class="brand-logo" aria-hidden="true">CG</span>' +
+      '<span class="brand-logo" aria-hidden="true">cogsf</span>' +
       (lang === "zh"
         ? '<span class="brand-text"><b>' + esc(SITE.name_zh) + "</b><small>" + esc(SITE.name_en) + "</small></span>"
         : '<span class="brand-text"><b>Church of God</b><small>in SF Bay Area</small></span>') +
