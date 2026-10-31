@@ -18,6 +18,11 @@ window.PHOTOS = [
     caption_zh: "一起爬山",
   },
   {
+    src: "images/photos/campus-outreach.jpg",
+    caption_en: "Sharing the gospel on campus at Berkeley",
+    caption_zh: "在伯克利校园传福音",
+  },
+  {
     src: "images/photos/big-gathering.webp",
     caption_en: "All of us together",
     caption_zh: "大家在一起",
@@ -36,5 +41,10 @@ window.PHOTOS = [
     src: "images/photos/redwood-train.webp",
     caption_en: "Train ride through the redwoods",
     caption_zh: "红木林小火车",
+  },
+  {
+    src: "images/photos/hall-gathering.jpg",
+    caption_en: "Reading the Word together",
+    caption_zh: "一同读主的话",
   },
 ];
