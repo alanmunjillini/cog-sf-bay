@@ -39,7 +39,6 @@
       contactBtn: "Contact form",
       backHome: "‹ Back to home",
       photoSoon: "Photo coming soon",
-      events: "Events",
       footerAbout: "A young, joyful family of Christians across the San Francisco Bay Area.",
       footerExplore: "Explore",
       footerRegions: "Regions",
@@ -68,7 +67,6 @@
       contactBtn: "填写联系表格",
       backHome: "‹ 返回主页",
       photoSoon: "照片即将上传",
-      events: "活动",
       footerAbout: "旧金山湾区一群年轻、喜乐的基督徒，像一个大家庭。",
       footerExplore: "浏览",
       footerRegions: "各区",
@@ -146,7 +144,7 @@
 
   function regionColor(id) {
     var r = regionById(id);
-    return r ? r.color : "var(--coral)";
+    return r ? r.color : "var(--primary)";
   }
 
   // "all" items show on every region's page.
@@ -538,53 +536,29 @@
     document.body.style.overflow = "";
   }
 
+  // data-limit="5" makes the home-page mosaic (one big tile + four); empty slots get placeholders.
   function makeGallery(root) {
     var limit = +root.getAttribute("data-limit") || 0;
-    var regionLock = root.getAttribute("data-region");
-    var withFilters = root.hasAttribute("data-filters");
-    var filter = regionLock || "all";
-
-    function albums() {
-      return SITE.regions
-        .map(function (r) { return { id: r.id, name: pick(r, "name"), color: r.color }; })
-        .concat([{ id: "events", name: tr("events"), color: "var(--coral)" }]);
-    }
 
     function draw() {
-      var list = PHOTOS.filter(function (p) { return p.src && (filter === "all" || p.album === filter); });
+      var list = PHOTOS.filter(function (p) { return p.src; });
       if (limit) list = list.slice(0, limit);
-      var html = "";
-      if (withFilters) {
+      var html = '<div class="photo-grid' + (limit ? " mosaic" : "") + '">';
+      html += list
+        .map(function (p, i) {
+          return (
+            '<button type="button" class="photo reveal" data-i="' + i + '">' +
+            '<img loading="lazy" src="' + esc(p.src) + '" alt="' + esc(pick(p, "caption")) + '">' +
+            (pick(p, "caption") ? '<span class="cap">' + esc(pick(p, "caption")) + "</span>" : "") +
+            "</button>"
+          );
+        })
+        .join("");
+      var slots = limit ? limit - list.length : list.length ? 0 : 6;
+      for (var i = 0; i < slots; i++) {
         html +=
-          '<div class="photo-filters">' +
-          '<button type="button" data-album="all" class="' + (filter === "all" ? "active" : "") + '">' + tr("all") + "</button>" +
-          albums()
-            .map(function (a) {
-              return '<button type="button" data-album="' + a.id + '" class="' + (filter === a.id ? "active" : "") + '">' + esc(a.name) + "</button>";
-            })
-            .join("") +
-          "</div>";
-      }
-      html += '<div class="photo-grid' + (limit ? " mosaic" : "") + '">';
-      if (list.length) {
-        html += list
-          .map(function (p, i) {
-            return (
-              '<button type="button" class="photo reveal" data-i="' + i + '">' +
-              '<img loading="lazy" src="' + esc(p.src) + '" alt="' + esc(pick(p, "caption")) + '">' +
-              (pick(p, "caption") ? '<span class="cap">' + esc(pick(p, "caption")) + "</span>" : "") +
-              "</button>"
-            );
-          })
-          .join("");
-      } else {
-        var n = limit || 9;
-        var colors = albums();
-        for (var i = 0; i < n; i++) {
-          html +=
-            '<div class="photo placeholder reveal" style="--rc:' + colors[i % colors.length].color + '">' +
-            '<div><span class="ph-icon">📷</span><small>' + tr("photoSoon") + "</small></div></div>";
-        }
+          '<div class="photo placeholder reveal">' +
+          '<div><span class="ph-icon">📷</span><small>' + tr("photoSoon") + "</small></div></div>";
       }
       html += "</div>";
       root.innerHTML = html;
@@ -593,12 +567,6 @@
     }
 
     root.addEventListener("click", function (e) {
-      var f = e.target.closest("[data-album]");
-      if (f) {
-        filter = f.getAttribute("data-album");
-        draw();
-        return;
-      }
       var ph = e.target.closest(".photo[data-i]");
       if (ph) {
         ensureLightbox();
